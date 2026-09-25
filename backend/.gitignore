@@ -1,1 +1,8 @@
 node_modules/
+
+# Dados locais (não versionar dados de clientes)
+data/
+*.sqlite-journal
+*.sqlite-wal
+*.sqlite-shm
+.env

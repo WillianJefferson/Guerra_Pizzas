@@ -3,120 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pizzaria Bella Napoli - Cardápio Online</title>
-    <!-- Bootstrap 5 CSS -->
+    <title>Guerra de Pizzas — Peça online</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 <body class="bg-light">
-
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="#"><i class="fa-solid fa-pizza-slice text-warning me-2"></i>Bella Napoli</a>
-            <button class="btn btn-warning position-relative" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
-                <i class="fa-solid fa-cart-shopping"></i> Carrinho
-                <span id="cart-badge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
-            </button>
+    <nav class="navbar navbar-dark bg-dark sticky-top">
+        <div class="container nav-content">
+            <a class="navbar-brand fw-bold" href="#">🍕 Guerra de Pizzas</a>
+            <div class="nav-actions">
+                <button id="orders-button" class="btn btn-outline-light btn-sm">Meus pedidos</button>
+                <button id="account-button" class="btn btn-outline-light btn-sm">Entrar / cadastrar</button>
+                <button id="logout-button" class="btn btn-outline-light btn-sm" hidden>Sair</button>
+                <button id="cart-button" class="btn btn-warning">Carrinho <span id="cart-badge" class="badge bg-dark">0</span></button>
+            </div>
         </div>
     </nav>
-
-    <!-- Hero Section -->
     <header class="hero-section text-center">
         <div class="container">
-            <h1 class="display-4 fw-bold">As Melhores Pizzas Artesanais</h1>
-            <p class="lead">Peça online e receba quentinha na sua casa!</p>
+            <p class="hero-eyebrow">FEITA NA HORA, DO SEU JEITO</p>
+            <h1 class="display-4 fw-bold">Sua próxima pizza favorita.</h1>
+            <p class="lead">Escolha os sabores e faça seu pedido sem sair de casa.</p>
+            <a class="btn btn-warning" href="#cardapio">Escolher minha pizza</a>
         </div>
     </header>
-
-    <!-- Main Content -->
     <main class="container my-5">
-        <h2 class="mb-4 text-center fw-bold">Nosso Cardápio</h2>
-        
-        <div class="row g-4" id="menu-items">
-            <!-- Pizza 1 -->
-            <div class="col-md-4">
-                <div class="card h-100 shadow-sm">
-                    <img src="https://images.unsplash.com/photo-1604382355076-af4b0eb60143?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Pizza Margherita">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title fw-bold">Pizza Margherita</h5>
-                        <p class="card-text text-muted small">Molho de tomate artesanal, muçarela de búfala, manjericão fresco e azeite.</p>
-                        <div class="mt-auto d-flex justify-content-between align-items-center">
-                            <span class="fs-5 fw-bold text-success">R$ 45,00</span>
-                            <button class="btn btn-outline-dark btn-sm" onclick="addToCart(1, 'Pizza Margherita', 45.00)">Adicionar</button>
-                        </div>
-                    </div>
-                </div>
+        <div data-feedback role="status" aria-live="polite" hidden></div>
+        <section id="cardapio" aria-labelledby="menu-title">
+            <div class="section-heading">
+                <div><h2 id="menu-title" class="fw-bold">Nosso cardápio</h2><p class="text-muted">Monte seu pedido. O pagamento é feito na entrega.</p></div>
+                <button id="reload-menu" class="btn btn-outline-dark btn-sm">Atualizar cardápio</button>
             </div>
-
-            <!-- Pizza 2 -->
-            <div class="col-md-4">
-                <div class="card h-100 shadow-sm">
-                    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Pizza Calabresa">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title fw-bold">Pizza Calabresa</h5>
-                        <p class="card-text text-muted small">Molho de tomate, muçarela, fatias de calabresa selecionada e cebolas roxas.</p>
-                        <div class="mt-auto d-flex justify-content-between align-items-center">
-                            <span class="fs-5 fw-bold text-success">R$ 48,00</span>
-                            <button class="btn btn-outline-dark btn-sm" onclick="addToCart(2, 'Pizza Calabresa', 48.00)">Adicionar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Pizza 3 -->
-            <div class="col-md-4">
-                <div class="card h-100 shadow-sm">
-                    <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Pizza Quatro Queijos">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title fw-bold">Pizza Quatro Queijos</h5>
-                        <p class="card-text text-muted small">Molho de tomate, muçarela, provolone, parmesão e gorgonzola.</p>
-                        <div class="mt-auto d-flex justify-content-between align-items-center">
-                            <span class="fs-5 fw-bold text-success">R$ 55,00</span>
-                            <button class="btn btn-outline-dark btn-sm" onclick="addToCart(3, 'Pizza Quatro Queijos', 55.00)">Adicionar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+            <p id="delivery-info" class="delivery-info">Consultando entrega…</p>
+            <div class="row g-4" id="menu-items" aria-live="polite"><p>Carregando cardápio…</p></div>
+        </section>
+        <section id="account-section" class="mt-5" hidden aria-labelledby="orders-title">
+            <div class="section-heading"><h2 id="orders-title">Meus pedidos</h2><button id="refresh-orders" class="btn btn-outline-dark btn-sm">Atualizar pedidos</button></div>
+            <p class="text-muted">Acompanhe a confirmação, o pagamento e a entrega. Os dados são atualizados ao abrir esta seção ou tocar em atualizar.</p>
+            <div id="notifications" class="mb-4" aria-live="polite"></div>
+            <div id="orders-list" class="orders-list"></div>
+        </section>
     </main>
-
-    <!-- Cart Offcanvas -->
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="cartOffcanvas" aria-labelledby="cartOffcanvasLabel">
-        <div class="offcanvas-header bg-dark text-white">
-            <h5 class="offcanvas-title" id="cartOffcanvasLabel"><i class="fa-solid fa-cart-shopping me-2"></i>Seu Carrinho</h5>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body d-flex flex-column justify-content-between">
-            <div>
-                <ul id="cart-items" class="list-group list-group-flush mb-3">
-                    <!-- Dynamic Cart Items -->
-                    <li class="list-group-item text-center text-muted">Seu carrinho está vazio.</li>
-                </ul>
-            </div>
-            <div>
-                <div class="d-flex justify-content-between fw-bold fs-5 mb-3 border-top pt-2">
-                    <span>Total:</span>
-                    <span id="cart-total" class="text-success">R$ 0,00</span>
-                </div>
-                <button class="btn btn-success w-100 py-2 fw-bold" onclick="checkout()">Finalizar Pedido</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="bg-dark text-white text-center py-4 mt-5">
-        <div class="container">
-            <p class="mb-0">&copy; 2026 Pizzaria Bella Napoli. Todos os direitos reservados.</p>
-        </div>
-    </footer>
-
-    <!-- Bootstrap 5 JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Custom Application Logic -->
-    <script src="script.js"></script>
+    <dialog id="cart-dialog" aria-labelledby="cart-title">
+        <div class="dialog-heading"><h2 id="cart-title">Seu carrinho</h2><button type="button" class="btn-close" data-close="cart-dialog" aria-label="Fechar carrinho"></button></div>
+        <div data-feedback role="status" aria-live="polite" hidden></div>
+        <div id="cart-items"></div>
+        <div class="totals"><div><span>Subtotal</span><span id="cart-subtotal">R$ 0,00</span></div><div><span>Entrega</span><span id="cart-delivery">R$ 0,00</span></div><div class="grand-total"><strong>Total</strong><strong id="cart-total">R$ 0,00</strong></div></div>
+        <button id="checkout-button" class="btn btn-success w-100">Continuar para entrega</button>
+    </dialog>
+    <dialog id="auth-dialog" aria-labelledby="auth-title">
+        <div class="dialog-heading"><h2 id="auth-title">Entrar na sua conta</h2><button type="button" class="btn-close" data-close="auth-dialog" aria-label="Fechar acesso"></button></div>
+        <p>Salve seus endereços e acompanhe seus pedidos.</p>
+        <div data-feedback role="status" aria-live="polite" hidden></div>
+        <form id="auth-form">
+            <fieldset>
+                <div id="name-field" class="mb-3" hidden><label for="auth-name" class="form-label">Nome</label><input id="auth-name" name="nome" class="form-control" minlength="2" maxlength="150" autocomplete="name"></div>
+                <div class="mb-3"><label for="auth-email" class="form-label">E-mail</label><input id="auth-email" name="email" type="email" class="form-control" maxlength="254" autocomplete="email" required></div>
+                <div class="mb-3"><label for="auth-password" class="form-label">Senha</label><input id="auth-password" name="senha" type="password" class="form-control" minlength="8" maxlength="128" autocomplete="current-password" required><small>Mínimo de 8 caracteres.</small></div>
+                <button id="auth-submit" class="btn btn-success w-100">Entrar</button>
+                <button id="auth-toggle" type="button" class="btn btn-link w-100 mt-2">Ainda não tenho conta</button>
+            </fieldset>
+        </form>
+    </dialog>
+    <dialog id="checkout-dialog" aria-labelledby="checkout-title">
+        <div class="dialog-heading"><h2 id="checkout-title">Entrega e pagamento</h2><button type="button" class="btn-close" data-close="checkout-dialog" aria-label="Fechar finalização"></button></div>
+        <div data-feedback role="status" aria-live="polite" hidden></div>
+        <details id="address-details" class="mb-4">
+            <summary>Cadastrar novo endereço</summary>
+            <form id="address-form" class="mt-3">
+                <fieldset>
+                    <div class="address-grid">
+                        <label>Rua<input name="rua" class="form-control" maxlength="200" autocomplete="address-line1" required></label>
+                        <label>Número<input name="numero" class="form-control" maxlength="20" required></label>
+                        <label>Complemento<input name="complemento" class="form-control" maxlength="150" autocomplete="address-line2"></label>
+                        <label>Bairro<input name="bairro" class="form-control" maxlength="100" required></label>
+                        <label>Cidade<input name="cidade" class="form-control" maxlength="100" autocomplete="address-level2" required></label>
+                        <label>UF<select name="estado" id="state-select" class="form-select" autocomplete="address-level1" required><option value="">Selecione</option></select></label>
+                        <label>CEP<input name="cep" class="form-control" inputmode="numeric" pattern="[0-9]{5}-?[0-9]{3}" maxlength="9" autocomplete="postal-code" required></label>
+                    </div>
+                    <label class="my-3"><input name="principal" type="checkbox"> Usar como endereço principal</label>
+                    <button class="btn btn-outline-success w-100">Salvar endereço</button>
+                </fieldset>
+            </form>
+        </details>
+        <form id="checkout-form">
+            <fieldset>
+                <label for="address-select" class="form-label">Entregar em</label><select id="address-select" class="form-select mb-3" required><option value="">Cadastre um endereço</option></select>
+                <label for="payment-select" class="form-label">Pagar na entrega</label><select id="payment-select" class="form-select mb-3" required><option value="dinheiro">Dinheiro</option><option value="cartao">Cartão na entrega</option></select>
+                <p class="small text-muted">Nenhuma cobrança online será realizada. O pedido fica aguardando confirmação da pizzaria.</p>
+                <div class="totals"><div><span>Subtotal</span><span id="checkout-subtotal"></span></div><div><span>Entrega</span><span id="checkout-delivery"></span></div><div class="grand-total"><strong>Total</strong><strong id="checkout-total"></strong></div></div>
+                <button id="place-order" class="btn btn-success w-100">Confirmar pedido</button>
+            </fieldset>
+        </form>
+    </dialog>
+    <footer class="bg-dark text-white text-center py-4 mt-5"><p class="mb-0">© 2026 Guerra de Pizzas</p></footer>
 </body>
 </html>
